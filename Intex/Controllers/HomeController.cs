@@ -18,27 +18,27 @@ namespace Intex.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(/*int collisionType, */int pageNum = 1)
-        {
-            int pageSize = 15;
-            // collisionType = repo.Collisions
+        //public IActionResult Index(/*int collisionType, */int pageNum = 1)
+        //{
+        //    int pageSize = 15;
+        //    // collisionType = repo.Collisions
 
-            //var x = new CollisionsViewModel
-            //{
-            //    Collisions = repo.Collisions
-            //    .Where(c => c.CRASH_SEVERITY_ID == collisionType)
-            //    .OrderBy(c => c.CITY)
-            //    .Skip((pageNum - 1) * pageSize)
-            //    .Take(pageSize),
+        //    //var x = new CollisionsViewModel
+        //    //{
+        //    //    Collisions = repo.Collisions
+        //    //    .Where(c => c.CRASH_SEVERITY_ID == collisionType)
+        //    //    .OrderBy(c => c.CITY)
+        //    //    .Skip((pageNum - 1) * pageSize)
+        //    //    .Take(pageSize),
 
-            //    PageInfo = new PageInfo
-            //    {
-            //        TotalNumCollisions =
-            //        ()
-            //    }
-            //};
-            return View();
-        }
+        //    //    PageInfo = new PageInfo
+        //    //    {
+        //    //        TotalNumCollisions =
+        //    //        ()
+        //    //    }
+        //    //};
+        //    return View();
+        //}
 
         public IActionResult Index()
         {
