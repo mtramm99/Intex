@@ -2,6 +2,7 @@ using Intex.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,13 @@ namespace Intex
             });
 
             services.AddScoped<ICollisionsRepository, EFCollisionsRepository>();
+
+            // For admin login
+            services.AddDbContext<AppIdentityDBContext>(options =>
+                options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +61,8 @@ namespace Intex
 
             app.UseRouting();
 
+            // For admin login
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -61,6 +71,8 @@ namespace Intex
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
+
+            IdentitySeedData.EnsurePopulated(app);
+        }        
     }
 }
