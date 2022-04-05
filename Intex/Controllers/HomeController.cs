@@ -19,6 +19,7 @@ namespace Intex.Controllers
         }
 
         public IActionResult Index(int collisionType, int pageNum = 1)
+        public HomeController(ICollisionsRepository temp)
         {
             int pageSize = 15;
 
@@ -29,6 +30,8 @@ namespace Intex.Controllers
                 .OrderBy(c => c.CITY)
                 .Skip((pageNum -1) * pageSize)
                 .Take(pageSize),
+            repo = temp;
+        }
 
                 PageInfo = new PageInfo
                 {
@@ -37,6 +40,10 @@ namespace Intex.Controllers
                 }
             };
             return View();
+        public IActionResult Index()
+        {
+            var test = repo.Collisions.Where(x => x.CRASH_DATETIME == "2019-02-08T10:56:00.000").ToList();
+            return View(test);
         }
 
         // Example shtuff
