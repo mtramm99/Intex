@@ -1,0 +1,36 @@
+﻿@{
+}
+
+@model List<Collision>
+
+<div>
+    <table class="table table-bordered table-striped">
+        <thead class="font-weight-bold">
+            <tr>
+                <td>Event Occurance</td>
+                <td>Route</td>
+                <td>Milepoint</td>
+                <td>Road</td>
+                <td>City</td>
+                <td>County</td>
+                <td>Crash Severity</td>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@x.CRASH_DATETIME</td>
+                    <td>@x.ROUTE</td>
+                    <td>@x.MILEPOINT</td>
+                    <td>@x.MAIN_ROAD_NAME</td>
+                    <td>@x.CITY</td>
+                    <td>@x.COUNTY_NAME</td>
+                    <td>@x.CRASH_SEVERITY_ID</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
