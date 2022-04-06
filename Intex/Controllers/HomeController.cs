@@ -26,7 +26,7 @@ namespace Intex.Controllers
         public IActionResult CollisionSummary(int collisionType, int pageNum = 1)
         {
             int pageSize = 50;            
-
+            
             var x = new CollisionsViewModel
             {
                 Collisions = repo.Collisions
@@ -45,8 +45,37 @@ namespace Intex.Controllers
                     CurrentPage = pageNum
                 }
             };
+
             return View(x);
+            
+
+            
         }
+
+        [HttpPost]
+        public IActionResult Filter(int pageNum = 1, Collision col = null)
+        {
+            int pageSize = 50;
+
+            var x = new CollisionsViewModel
+            {
+                Collisions = repo.Collisions
+                    .Where(x => x.CITY == col.CITY)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCollisions =
+                        (repo.Collisions.Where(x => x.CITY == col.CITY).Count()),
+                    CollisionsPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View("CollisionSummary", x);
+        }
+
         public IActionResult Privacy()
         {
             return View();
