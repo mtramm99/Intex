@@ -1,0 +1,72 @@
+﻿@page "/admin/collisions"
+@page "/admin"
+@inherits OwningComponentBase<ICollisionsRepository>
+
+<table class="table table-sm table-striped table-bordered">
+
+    <thead>
+        <tr>
+            <th>Crash ID</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (CollisionData?.Count() > 0)
+            {
+                // List the collisions
+                @foreach (Collision c in CollisionData)
+                {
+                    <tr>
+                        <td>@c.CRASH_ID</td>
+
+                        <td>
+                            <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(c.CRASH_ID)">Details</NavLink>
+                        </td>
+
+                        <td>
+                            <NavLink class="btn btn-info btn-sm" href="@GetEditUrl(c.CRASH_ID)">Edit</NavLink>
+                        </td>
+
+                        <td>
+                            <button class="btn btn-danger btn-sm" @onclick="@(x => RemoveCollision(c))">Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">No Collisions</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+<NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink>
+
+@code {
+
+    public ICollisionsRepository repo => Service;
+
+    public IEnumerable<Collision> CollisionData { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+
+    public async Task UpdateData()
+    {
+        CollisionData = await repo.Collisions.ToListAsync();
+    }
+
+    public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
+    public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
+
+    public async Task RemoveCollision (Collision c)
+    {
+        repo.DeleteCollision(c);
+        await UpdateData();
+    }
+}
+
