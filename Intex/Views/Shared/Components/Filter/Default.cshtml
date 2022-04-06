@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-6">
                 <label asp-for="CRASH_DATETIME">Date:</label>
-                <input asp-for="CRASH_DATETIME" type="date" />
+                <input asp-for="CRASH_DATETIME" type="date"/>
             </div>
             <div class="col-6">
                 <label asp-for="CITY">City</label>
@@ -61,11 +61,13 @@
             </div>
         <br />
         <div class="row">
-            <div class="col-10"></div>
-            <div class="col-2">
+            <div class="col">
                 <button type="submit" class="btn btn-primary">Filter</button>
+                <a class="btn btn-info" asp-controller="Home" asp-action="CollisionSummary">Clear Filter</a>
             </div>
         </div>
+        </div>
+
     </form>
 
 

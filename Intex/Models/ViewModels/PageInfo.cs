@@ -11,7 +11,7 @@ namespace Intex.Models.ViewModels
         public int CollisionsPerPage { get; set; }
         public int CurrentPage { get; set; }
         
-        
+        public DateTime? Date { get; set; }
         public string City { get; set; }
         public string County { get; set; }
         public float Severity { get; set; }

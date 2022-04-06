@@ -23,11 +23,12 @@ namespace Intex.Controllers
             return View();
         }
 
-        public IActionResult CollisionSummary(int pageNum = 1, string city = null, string county = null, float severity = 0)
+        public IActionResult CollisionSummary(int pageNum = 1, string city = null, string county = null, float severity = 0, DateTime? date = null)
         {
             int pageSize = 50;
 
-            if (city == null && county == null && severity == 0)
+
+            if (city == null && county == null && severity == 0 && date == null)
             {
                 var x = new CollisionsViewModel
                 {
@@ -60,6 +61,7 @@ namespace Intex.Controllers
                 var x = new CollisionsViewModel
                 {
                     Collisions = repo.Collisions
+                        .Where(x => date != new DateTime(1,1,1) ? x.CRASH_DATETIME.Date == date : true)
                         .Where(x => city != null ? x.CITY == city : true)
                         .Where(x => county != null ? x.COUNTY_NAME == county : true)
                         .Where(x => severity != 0 ? x.CRASH_SEVERITY_ID == severity : true)
@@ -70,6 +72,7 @@ namespace Intex.Controllers
                     {
                         TotalNumCollisions =
                         repo.Collisions
+                        .Where(x => date != new DateTime(1,1,1) ? x.CRASH_DATETIME.Date == date : true)
                         .Where(x => city != null ? x.CITY == city : true)
                         .Where(x => county != null ? x.COUNTY_NAME == county : true)
                         .Where(x => severity != 0 ? x.CRASH_SEVERITY_ID == severity : true)
@@ -78,6 +81,7 @@ namespace Intex.Controllers
                         City = city,
                         Severity = severity,
                         County = county,
+                        Date = date,
                         CurrentPage = pageNum
                     }
                 };
@@ -99,6 +103,7 @@ namespace Intex.Controllers
             var x = new CollisionsViewModel
             {
                 Collisions = repo.Collisions
+                    .Where(x => col.CRASH_DATETIME.Date != new DateTime(1,1,1) ? x.CRASH_DATETIME.Date == col.CRASH_DATETIME.Date : true)
                     .Where(x => col.CITY != null ? x.CITY == col.CITY : true)
                     .Where(x => col.COUNTY_NAME != null ? x.COUNTY_NAME == col.COUNTY_NAME : true)
                     .Where(x => col.CRASH_SEVERITY_ID != 0 ? x.CRASH_SEVERITY_ID == col.CRASH_SEVERITY_ID : true)
@@ -109,6 +114,7 @@ namespace Intex.Controllers
                 {
                     TotalNumCollisions =
                     (repo.Collisions
+                        .Where(x => col.CRASH_DATETIME.Date != new DateTime(1,1,1) ? x.CRASH_DATETIME.Date == col.CRASH_DATETIME.Date : true)
                         .Where(x => col.CITY != null ? x.CITY == col.CITY : true)
                         .Where(x => col.COUNTY_NAME != null ? x.COUNTY_NAME == col.COUNTY_NAME : true)
                         .Where(x => col.CRASH_SEVERITY_ID != 0 ? x.CRASH_SEVERITY_ID == col.CRASH_SEVERITY_ID : true)
@@ -117,6 +123,7 @@ namespace Intex.Controllers
                     City = col.CITY,
                     County = col.COUNTY_NAME,
                     Severity = col.CRASH_SEVERITY_ID,
+                    Date = col.CRASH_DATETIME.Date,
                     CurrentPage = pageNum
                 }
             };
@@ -124,6 +131,13 @@ namespace Intex.Controllers
             ViewBag.Filter = x;
 
             return View("CollisionSummary", x);            
+        }
+
+        public IActionResult Details (int id)
+        {
+            var x = repo.Collisions.Single(x => x.CRASH_ID == id);
+
+            return View(x);
         }
 
         public IActionResult Privacy()

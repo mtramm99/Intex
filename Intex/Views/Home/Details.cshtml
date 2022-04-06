@@ -1,0 +1,233 @@
+﻿@{
+}
+
+@model Collision
+
+<h3 class="bg-info text-white text-center p-1">Details</h3>
+
+<table class="table table-sm table-bordered table-striped">
+    <tbody>
+        <tr><th>Crash Id:</th><td>@Model.CRASH_ID</td></tr>
+        <tr><th>Date & Time</th><td>@Model.CRASH_DATETIME</td></tr>
+        <tr><th>Route</th><td>@Model.ROUTE</td></tr>
+        <tr><th>Milepoint</th><td>@Model.MILEPOINT</td></tr>
+        <tr><th>Latitude</th><td>@Model.LAT_UTM_Y</td></tr>
+        <tr><th>Longitude</th><td>@Model.LONG_UTM_X</td></tr>
+        <tr><th>Road Name</th><td>@Model.MAIN_ROAD_NAME</td></tr>
+        <tr><th>City</th><td>@Model.CITY</td></tr>
+        <tr><th>County</th><td>@Model.COUNTY_NAME</td></tr>
+        <tr><th>Crash Severity ID</th><td>@Model.CRASH_SEVERITY_ID</td></tr>
+        <tr>
+            <th>Work Zone Related</th>
+            @if (Model.WORK_ZONE_RELATED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Pedestrian Involved</th>
+            @if (Model.PEDESTRIAN_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Bicyclist Involved</th>
+            @if (Model.BICYCLIST_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Motorcycle Involved</th>
+            @if (Model.MOTORCYCLE_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Improper Restraint</th>
+            @if (Model.IMPROPER_RESTRAINT == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Unrestrained</th>
+            @if (Model.UNRESTRAINED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>DUI</th>
+            @if (Model.DUI == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Intersection Related</th>
+            @if (Model.INTERSECTION_RELATED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Wild Animal Related</th>
+            @if (Model.WILD_ANIMAL_RELATED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Domestic Animal Related</th>
+            @if (Model.DOMESTIC_ANIMAL_RELATED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Overturn Rollover</th>
+            @if (Model.OVERTURN_ROLLOVER == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Commercial Motor Vehicle Involved</th>
+            @if (Model.COMMERCIAL_MOTOR_VEH_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Teenage Driver Involved</th>
+            @if (Model.TEENAGE_DRIVER_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Older Driver Involved</th>
+            @if (Model.OLDER_DRIVER_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Night Conditions</th>
+            @if (Model.NIGHT_DARK_CONDITION == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Single Vehicle</th>
+            @if (Model.SINGLE_VEHICLE == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Distracted Driving</th>
+            @if (Model.DISTRACTED_DRIVING == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Drowsy Driving</th>
+            @if (Model.DROWSY_DRIVING == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Roadway Departure</th>
+            @if (Model.ROADWAY_DEPARTURE == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+    </tbody>
+    
+
+</table>
+<br /><br /><a class="btn btn-secondary" asp-controller="Home" asp-action="CollisionSummary">View All Collisions</a>
