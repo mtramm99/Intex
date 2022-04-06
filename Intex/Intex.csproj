@@ -23,15 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Admin\_Imports.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Admin\_Imports.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Admin\_Imports.razor" />
+    <Folder Include="Pages\Admin\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>
