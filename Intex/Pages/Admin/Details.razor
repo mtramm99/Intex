@@ -14,25 +14,215 @@
         <tr><th>City</th><td>@c.CITY</td></tr>
         <tr><th>County</th><td>@c.COUNTY_NAME</td></tr>
         <tr><th>Crash Severity ID</th><td>@c.CRASH_SEVERITY_ID</td></tr>
-        <tr><th>Work Zone Related</th><td>@c.WORK_ZONE_RELATED</td></tr>
-        <tr><th>Pedestrian Involved</th><td>@c.PEDESTRIAN_INVOLVED</td></tr>
-        <tr><th>Bicyclist Involved</th><td>@c.BICYCLIST_INVOLVED</td></tr>
-        <tr><th>Motorcycle Involved</th><td>@c.MOTORCYCLE_INVOLVED</td></tr>
-        <tr><th>Improper Restraint</th><td>@c.IMPROPER_RESTRAINT</td></tr>
-        <tr><th>Unrestrained</th><td>@c.UNRESTRAINED</td></tr>
-        <tr><th>DUI</th><td>@c.DUI</td></tr>
-        <tr><th>Intersection Related</th><td>@c.INTERSECTION_RELATED</td></tr>
-        <tr><th>Wild Animal Related</th><td>@c.WILD_ANIMAL_RELATED</td></tr>
-        <tr><th>Domestic Animal Related</th><td>@c.DOMESTIC_ANIMAL_RELATED</td></tr>
-        <tr><th>Overturn Rollover</th><td>@c.OVERTURN_ROLLOVER</td></tr>
-        <tr><th>Commercial Motor Vehicle Involved</th><td>@c.COMMERCIAL_MOTOR_VEH_INVOLVED</td></tr>
-        <tr><th>Teenage Driver Involved</th><td>@c.TEENAGE_DRIVER_INVOLVED</td></tr>
-        <tr><th>Older Driver Involved</th><td>@c.OLDER_DRIVER_INVOLVED</td></tr>
-        <tr><th>Night Dark Condition</th><td>@c.NIGHT_DARK_CONDITION</td></tr>
-        <tr><th>Single Vehicle</th><td>@c.SINGLE_VEHICLE</td></tr>
-        <tr><th>Distracted Driving</th><td>@c.DISTRACTED_DRIVING</td></tr>
-        <tr><th>Drowsy Driving</th><td>@c.DROWSY_DRIVING</td></tr>
-        <tr><th>Roadway Departure</th><td>@c.ROADWAY_DEPARTURE</td></tr>
+        <tr>
+            <th>Work Zone Related</th>
+            @if (c.WORK_ZONE_RELATED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Pedestrian Involved</th>
+            @if (c.PEDESTRIAN_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Bicyclist Involved</th>
+            @if (c.BICYCLIST_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Motorcycle Involved</th>
+            @if (c.MOTORCYCLE_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Improper Restraint</th>
+            @if (c.IMPROPER_RESTRAINT == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Unrestrained</th>
+            @if (c.UNRESTRAINED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>DUI</th>
+            @if (c.DUI == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Intersection Related</th>
+            @if (c.INTERSECTION_RELATED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Wild Animal Related</th>
+            @if (c.WILD_ANIMAL_RELATED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Domestic Animal Related</th>
+            @if (c.DOMESTIC_ANIMAL_RELATED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Overturn Rollover</th>
+            @if (c.OVERTURN_ROLLOVER == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Commercial Motor Vehicle Involved</th>
+            @if (c.COMMERCIAL_MOTOR_VEH_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Teenage Driver Involved</th>
+            @if (c.TEENAGE_DRIVER_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Older Driver Involved</th>
+            @if (c.OLDER_DRIVER_INVOLVED == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Night Conditions</th>
+            @if (c.NIGHT_DARK_CONDITION == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Single Vehicle</th>
+            @if (c.SINGLE_VEHICLE == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Distracted Driving</th>
+            @if (c.DISTRACTED_DRIVING == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Drowsy Driving</th>
+            @if (c.DROWSY_DRIVING == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
+        <tr>
+            <th>Roadway Departure</th>
+            @if (c.ROADWAY_DEPARTURE == 0)
+            {
+                <td>No</td>
+            }
+            else
+            {
+                <td>Yes</td>
+            }
+        </tr>
     </tbody>
 
     <NavLink class="btn btn-warning" href="@EditUrl">Edit</NavLink>

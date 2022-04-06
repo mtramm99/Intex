@@ -12,7 +12,7 @@ namespace Intex.Models
     public static class IdentitySeedData
     {
         private const string adminUser = "Admin";
-        private const string adminPassword = "mixerkitchen@toyotaFord";
+        private const string adminPassword = "mixer1kitchen@toyotaFord";
 
         public static async void EnsurePopulated (IApplicationBuilder app)
         {
