@@ -78,7 +78,7 @@ namespace Intex.Infrastructure
                         {
                             TagBuilder tb = new TagBuilder("a");
 
-                            tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i, road = PageBlah.Road, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity });
+                            tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity });
                             if (PageClassesEnabled)
                             {
                                 tb.AddCssClass(PageClass);
@@ -98,7 +98,7 @@ namespace Intex.Infrastructure
                     {
                         TagBuilder tb = new TagBuilder("a");
 
-                        tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i, road = PageBlah.Road, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity });
+                        tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity });
                         if (PageClassesEnabled)
                         {
                             tb.AddCssClass(PageClass);
@@ -115,7 +115,7 @@ namespace Intex.Infrastructure
                     {
                         TagBuilder tb = new TagBuilder("a");
 
-                        tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i, road = PageBlah.Road, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity });
+                        tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity });
                         if (PageClassesEnabled)
                         {
                             tb.AddCssClass(PageClass);
@@ -134,7 +134,7 @@ namespace Intex.Infrastructure
                     {
                         TagBuilder tb = new TagBuilder("a");
 
-                        tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i, road = PageBlah.Road, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity });
+                        tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity });
                         if (PageClassesEnabled)
                         {
                             tb.AddCssClass(PageClass);
@@ -152,7 +152,7 @@ namespace Intex.Infrastructure
                 {
                     TagBuilder tb = new TagBuilder("a");
 
-                    tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i , road = PageBlah.Road, city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity});
+                    tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i , city = PageBlah.City, county = PageBlah.County, severity = PageBlah.Severity});
                     if (PageClassesEnabled)
                     {
                         tb.AddCssClass(PageClass);
