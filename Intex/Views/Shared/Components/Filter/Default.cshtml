@@ -1,0 +1,77 @@
+﻿@{
+}
+
+@model Collision
+
+<div class="container p-5 border">
+    @{
+        //Filters:
+
+        // Date
+        // Main Road Name
+        // City
+        // County
+        // Crash Severity Id
+        // Other factors
+    }
+
+    <div class="row"><h4>Filter Results</h4></div>
+
+    <form method="post" asp-controller="Home" asp-action="Filter">
+        <div class="row">
+            <div class="col-4">
+                <label asp-for="CRASH_DATETIME">Date:</label>
+                <input asp-for="CRASH_DATETIME" type="date" />
+            </div>
+            <div class="col-4">
+                <label asp-for="MAIN_ROAD_NAME">Main Road</label>
+                <input asp-for="MAIN_ROAD_NAME" name="road" />
+            </div>
+            <div class="col-4">
+                <label asp-for="CITY">City</label>
+                <select asp-for="CITY">
+                    <option value=""></option>
+                    @foreach (var c in ViewBag.Cities)
+                    {
+                        <option value="@c">@c</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <label asp-for="COUNTY_NAME">County</label>
+                <select asp-for="COUNTY_NAME">
+                    <option value=""></option>
+                    @foreach (var c in ViewBag.Counties)
+                    {
+                        <option value="@c">@c</option>
+                    }
+                </select>
+
+            </div>
+            <div class="col-4">
+                <label asp-for="CRASH_SEVERITY_ID">Crash Severity</label>
+                <select asp-for="CRASH_SEVERITY_ID">
+                    <option value=""></option>
+                    <option value="1">No Injury</option>
+                    <option value="2">Possible Injury</option>
+                    <option value="3">Suspected Minor Injury</option>
+                    <option value="4">Suspected Serious Injury</option>
+                    <option value="5">Fatal</option>
+                </select>
+            </div>
+            <div class="col-4">Other Factors</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+
+
+</div>
