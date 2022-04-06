@@ -1,0 +1,25 @@
+﻿@page "/admin"
+            
+@using Microsoft.AspNetCore.Authorization 
+@attribute [Authorize]
+
+@{
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Utah Collision Resources Admin</title>
+    <link href="~/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <base href="/" />
+</head>
+
+<body>
+
+    <component type="typeof(Intex.Pages.Admin.Routed)" render-mode="Server" />
+    <script src="/_framework/blazor.server.js"></script>
+</body>
+
+</html>
