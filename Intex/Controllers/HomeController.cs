@@ -23,11 +23,11 @@ namespace Intex.Controllers
             return View();
         }
 
-        public IActionResult CollisionSummary(int pageNum = 1, string road = null, string city = null, string county = null, float severity = 0)
+        public IActionResult CollisionSummary(int pageNum = 1, string city = null, string county = null, float severity = 0)
         {
             int pageSize = 50;
 
-            if (city == null && road == null && county == null && severity == 0)
+            if (city == null && county == null && severity == 0)
             {
                 var x = new CollisionsViewModel
                 {
@@ -63,7 +63,6 @@ namespace Intex.Controllers
                         .Where(x => city != null ? x.CITY == city : true)
                         .Where(x => county != null ? x.COUNTY_NAME == county : true)
                         .Where(x => severity != 0 ? x.CRASH_SEVERITY_ID == severity : true)
-                        .Where(x => road != null ? x.MAIN_ROAD_NAME == road : true)
                         .Skip((pageNum - 1) * pageSize)
                         .Take(pageSize),
 
@@ -74,13 +73,11 @@ namespace Intex.Controllers
                         .Where(x => city != null ? x.CITY == city : true)
                         .Where(x => county != null ? x.COUNTY_NAME == county : true)
                         .Where(x => severity != 0 ? x.CRASH_SEVERITY_ID == severity : true)
-                        .Where(x => road != null ? x.MAIN_ROAD_NAME == road : true)
                         .Count(),
                         CollisionsPerPage = pageSize,
                         City = city,
                         Severity = severity,
                         County = county,
-                        Road = road,
                         CurrentPage = pageNum
                     }
                 };
@@ -105,7 +102,6 @@ namespace Intex.Controllers
                     .Where(x => col.CITY != null ? x.CITY == col.CITY : true)
                     .Where(x => col.COUNTY_NAME != null ? x.COUNTY_NAME == col.COUNTY_NAME : true)
                     .Where(x => col.CRASH_SEVERITY_ID != 0 ? x.CRASH_SEVERITY_ID == col.CRASH_SEVERITY_ID : true)
-                    .Where(x => col.MAIN_ROAD_NAME != null ? x.MAIN_ROAD_NAME == col.MAIN_ROAD_NAME : true)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
 
@@ -116,12 +112,10 @@ namespace Intex.Controllers
                         .Where(x => col.CITY != null ? x.CITY == col.CITY : true)
                         .Where(x => col.COUNTY_NAME != null ? x.COUNTY_NAME == col.COUNTY_NAME : true)
                         .Where(x => col.CRASH_SEVERITY_ID != 0 ? x.CRASH_SEVERITY_ID == col.CRASH_SEVERITY_ID : true)
-                        .Where(x => col.MAIN_ROAD_NAME != null ? x.MAIN_ROAD_NAME == col.MAIN_ROAD_NAME : true)
                         .Count()),
                     CollisionsPerPage = pageSize,
                     City = col.CITY,
                     County = col.COUNTY_NAME,
-                    Road = col.MAIN_ROAD_NAME,
                     Severity = col.CRASH_SEVERITY_ID,
                     CurrentPage = pageNum
                 }
