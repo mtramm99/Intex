@@ -10,6 +10,12 @@ namespace Intex.Models.ViewModels
         public int TotalNumCollisions { get; set; }
         public int CollisionsPerPage { get; set; }
         public int CurrentPage { get; set; }
+        
+        public string Road { get; set; }
+        public string City { get; set; }
+        public string County { get; set; }
+        public float Severity { get; set; }
+
 
         // Figure out num pages needed
         public int TotalPages => (int)Math.Ceiling((double)TotalNumCollisions / CollisionsPerPage);

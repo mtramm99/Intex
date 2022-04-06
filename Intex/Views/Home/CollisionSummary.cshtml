@@ -11,7 +11,8 @@
 
 <vc:filter></vc:filter>
 
-<br /><br />
+<br />
+<br />
 
 <div>
     <table class="table table-bordered table-striped">
@@ -40,7 +41,18 @@
         </tbody>
     </table>
 </div>
-<div page-blah="@Model.PageInfo" page-action="CollisionSummary" page-classes-enabled="true"
-     page-class="btn" page-class-normal="btn-outline-dark"
-     page-class-selected="btn-primary" class="btn-group pull-right m-1">
-</div> 
+
+@if (Model.PageInfo.City == null)
+{
+    <div page-blah="@Model.PageInfo" page-action="CollisionSummary" page-classes-enabled="true"
+         page-class="btn" page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary" class="btn-group pull-right m-1">
+    </div>
+}
+else
+{
+    <div page-blah="@Model.PageInfo" page-action="CollisionSummary"  page-classes-enabled="true"
+         page-class="btn" page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary" class="btn-group pull-right m-1">
+    </div>
+}
