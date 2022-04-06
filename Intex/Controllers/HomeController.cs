@@ -23,30 +23,72 @@ namespace Intex.Controllers
             return View();
         }
 
-        public IActionResult CollisionSummary(int collisionType, int pageNum = 1)
+        public IActionResult CollisionSummary(int pageNum = 1, string road = null, string city = null, string county = null, float severity = 0)
         {
-            int pageSize = 50;            
-            
-            var x = new CollisionsViewModel
+            int pageSize = 50;
+
+            if (city == null && road == null && county == null && severity == 0)
             {
-                Collisions = repo.Collisions
-                .Where(c => c.CRASH_SEVERITY_ID == collisionType || collisionType == 0)
-                .OrderBy(c => c.CITY)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
-
-                PageInfo = new PageInfo
+                var x = new CollisionsViewModel
                 {
-                    TotalNumCollisions =
-                    (collisionType == 0
-                    ? repo.Collisions.Count()
-                    : repo.Collisions.Where(x => x.CRASH_SEVERITY_ID == collisionType).Count()),
-                    CollisionsPerPage = pageSize,
-                    CurrentPage = pageNum
-                }
-            };
+                    Collisions = repo.Collisions
+                    .OrderBy(c => c.CITY)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
 
-            return View(x);
+                    PageInfo = new PageInfo
+                    {
+                        TotalNumCollisions =
+                        (city == null
+                        ? repo.Collisions.Count()
+                        : repo.Collisions.Count()),
+                        CollisionsPerPage = pageSize,
+                        City = null,
+                        CurrentPage = pageNum
+                    }
+                };
+
+                //if (col.CITY != null)
+                //{
+                //    x.Collisions = x.Collisions.Where(x => x.CITY == col.CITY);
+                //}
+
+                return View(x);
+            }
+            else
+            {
+                var x = new CollisionsViewModel
+                {
+                    Collisions = repo.Collisions
+                        .Where(x => city != null ? x.CITY == city : true)
+                        .Where(x => county != null ? x.COUNTY_NAME == county : true)
+                        .Where(x => severity != 0 ? x.CRASH_SEVERITY_ID == severity : true)
+                        .Where(x => road != null ? x.MAIN_ROAD_NAME == road : true)
+                        .Skip((pageNum - 1) * pageSize)
+                        .Take(pageSize),
+
+                    PageInfo = new PageInfo
+                    {
+                        TotalNumCollisions =
+                        repo.Collisions
+                        .Where(x => city != null ? x.CITY == city : true)
+                        .Where(x => county != null ? x.COUNTY_NAME == county : true)
+                        .Where(x => severity != 0 ? x.CRASH_SEVERITY_ID == severity : true)
+                        .Where(x => road != null ? x.MAIN_ROAD_NAME == road : true)
+                        .Count(),
+                        CollisionsPerPage = pageSize,
+                        City = city,
+                        Severity = severity,
+                        County = county,
+                        Road = road,
+                        CurrentPage = pageNum
+                    }
+                };
+
+                ViewBag.Filter = x;
+
+                return View(x);
+            }
             
 
             
@@ -60,20 +102,34 @@ namespace Intex.Controllers
             var x = new CollisionsViewModel
             {
                 Collisions = repo.Collisions
-                    .Where(x => x.CITY == col.CITY)
+                    .Where(x => col.CITY != null ? x.CITY == col.CITY : true)
+                    .Where(x => col.COUNTY_NAME != null ? x.COUNTY_NAME == col.COUNTY_NAME : true)
+                    .Where(x => col.CRASH_SEVERITY_ID != 0 ? x.CRASH_SEVERITY_ID == col.CRASH_SEVERITY_ID : true)
+                    .Where(x => col.MAIN_ROAD_NAME != null ? x.MAIN_ROAD_NAME == col.MAIN_ROAD_NAME : true)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
                     TotalNumCollisions =
-                        (repo.Collisions.Where(x => x.CITY == col.CITY).Count()),
+                    (repo.Collisions
+                        .Where(x => col.CITY != null ? x.CITY == col.CITY : true)
+                        .Where(x => col.COUNTY_NAME != null ? x.COUNTY_NAME == col.COUNTY_NAME : true)
+                        .Where(x => col.CRASH_SEVERITY_ID != 0 ? x.CRASH_SEVERITY_ID == col.CRASH_SEVERITY_ID : true)
+                        .Where(x => col.MAIN_ROAD_NAME != null ? x.MAIN_ROAD_NAME == col.MAIN_ROAD_NAME : true)
+                        .Count()),
                     CollisionsPerPage = pageSize,
+                    City = col.CITY,
+                    County = col.COUNTY_NAME,
+                    Road = col.MAIN_ROAD_NAME,
+                    Severity = col.CRASH_SEVERITY_ID,
                     CurrentPage = pageNum
                 }
             };
 
-            return View("CollisionSummary", x);
+            ViewBag.Filter = x;
+
+            return View("CollisionSummary", x);            
         }
 
         public IActionResult Privacy()
