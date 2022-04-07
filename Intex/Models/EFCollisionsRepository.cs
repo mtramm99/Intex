@@ -8,7 +8,7 @@ namespace Intex.Models
     public class EFCollisionsRepository : ICollisionsRepository 
     {
         private CollisionsDbContext context { get; set; }
-
+        
         public EFCollisionsRepository (CollisionsDbContext temp)
         {
             context = temp;
@@ -18,17 +18,19 @@ namespace Intex.Models
 
         public void SaveCollision(Collision c)
         {
-            throw new NotImplementedException();
+            context.SaveChanges();
         }
 
         public void CreateCollision(Collision c)
         {
-            throw new NotImplementedException();
+            context.Add(c);
+            context.SaveChanges();
         }
 
         public void DeleteCollision(Collision c)
         {
-            throw new NotImplementedException();
+            context.Remove(c);
+            context.SaveChanges();
         }
     }
 }
