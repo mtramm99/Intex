@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Collision Severity Predictor";
+}
+
+@model collisionPredictor
+
+
+    <form method="post" asp-controller="Inference" asp-action="Score">
+
+        <div><label>When did the Crash Take Place?</label><input asp-for="crash_datetime" /></div>
+        <div><label>At what milepoint did the crash take place?</label><input asp-for="milepoint" /></div>
+        <div>
+            <label>Did the crash happen at an intersection?</label><br />
+            <div class="wrapper">
+                <input type="radio" name="select" asp-for="intersection_related" id="option-1" checked value="1">
+                <input type="radio" name="select" asp-for="intersection_related" id="option-2" value="0">
+                <label for="option-1" class="option option-1">
+                    <div class="dot"></div>
+                    <span>Yes</span>
+                </label>
+                <label for="option-2" class="option option-2">
+                    <div class="dot"></div>
+                    <span>No</span>
+                </label>
+            </div>
+        </div>
+        <div><label>Was the driver a teenager?</label><input asp-for="teenage_driver_involved" /></div>
+        <div><label>Was it dark outside?</label><input asp-for="night_dark_condition" /></div>
+        <div><label>Was there one or more vehicles involved?</label><input asp-for="single_vehicle" /></div>
+        <div><label>Did the crash take place in Salt Lake County?</label><input asp-for="county_name_SALT_LAKE" /></div>
+
+        <button type="submit">What is the severity of my crash?</button>
+    </form>
+

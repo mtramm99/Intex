@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.ML.OnnxRuntime;
 
 namespace Intex
 {
@@ -33,6 +33,9 @@ namespace Intex
             {
                 options.UseMySql(Configuration["ConnectionStrings:CollisionsDbConnection"]);
             });
+
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("crashModel.onnx"));
 
             // For admin login
             services.AddDbContext<AppIdentityDBContext>(options =>

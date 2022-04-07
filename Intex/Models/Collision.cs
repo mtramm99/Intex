@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.ML.OnnxRuntime.Tensors;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -39,5 +40,7 @@ namespace Intex.Models
         public float DISTRACTED_DRIVING { get; set; }
         public float DROWSY_DRIVING { get; set; }
         public float ROADWAY_DEPARTURE { get; set; }
+
+       
     }
 }
