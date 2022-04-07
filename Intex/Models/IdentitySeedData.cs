@@ -14,6 +14,9 @@ namespace Intex.Models
         private const string adminUser = "Admin";
         private const string adminPassword = "mixer1kitchen@toyotaFord";
 
+        private const string mfaUser = "mfaAdmin";
+        private const string mfaPassword = "group34Intex$spring";
+
         public static async void EnsurePopulated (IApplicationBuilder app)
         {
             AppIdentityDBContext context = app.ApplicationServices
@@ -30,6 +33,7 @@ namespace Intex.Models
                 .GetRequiredService<UserManager<IdentityUser>>();
 
             IdentityUser user = await userManager.FindByIdAsync(adminUser);
+            IdentityUser userMfa = await userManager.FindByIdAsync(mfaUser);
 
             if (user == null)
             {
@@ -39,6 +43,17 @@ namespace Intex.Models
                 user.PhoneNumber = "555.123.4567";
 
                 await userManager.CreateAsync(user, adminPassword);
+            }
+
+            if (userMfa == null)
+            {
+                userMfa = new IdentityUser(mfaUser);
+
+                userMfa.Email = "mfa@utahcollisionresources.com";
+                userMfa.PhoneNumber = "555.321.2121";
+                userMfa.TwoFactorEnabled = true;
+
+                await userManager.CreateAsync(userMfa, mfaPassword);
             }
         }
     }
