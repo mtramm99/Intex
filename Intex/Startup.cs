@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.ML.OnnxRuntime;
+using System.Net;
 
 namespace Intex
 {
@@ -29,15 +30,41 @@ namespace Intex
         {
             services.AddControllersWithViews();
 
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
+            //    options.HttpsPort = 5001;
+            //});
+
+            string ebdb = Environment.GetEnvironmentVariable("ebdb");
+            string identity = Environment.GetEnvironmentVariable("identity");
+
+            //services.AddDbContext<CollisionsDbContext>(options =>
+            //{
+            //    options.UseMySql(ebdb);
+            //}); ///////////////////////////////////////////////////////////////////////// Use in production
+
             services.AddDbContext<CollisionsDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:CollisionsDbConnection"]);
             });
 
-            services.AddSingleton<InferenceSession>(
-                new InferenceSession("crashModel.onnx"));
+            services.AddHsts(options =>
+            {
+               // options.Preload = true;
+                //options.IncludeSubDomains = true;
+                //options.MaxAge = TimeSpan.FromDays(60);
+                //options.ExcludedHosts.Add("utahcollisionresources.com");
+            });
 
-            // For admin login
+            //services.AddSingleton<InferenceSession>(
+            //    new InferenceSession("crashModel.onnx"));
+
+
+            //For admin login
+            //services.AddDbContext<AppIdentityDBContext>(options =>
+            //    options.UseMySql(identity)); //////////////////////////////////// Use in production
+
             services.AddDbContext<AppIdentityDBContext>(options =>
                 options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]));
 
@@ -54,15 +81,32 @@ namespace Intex
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddServerSideBlazor();
+
+            // Require better 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 12;
+                options.Password.RequiredUniqueChars = 1;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseHsts();
+            //}
+
+            app.UseHsts();
 
 
             app.UseHttpsRedirection();
