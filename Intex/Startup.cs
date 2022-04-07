@@ -74,6 +74,13 @@ namespace Intex
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // CSP header
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self';");
+                await next();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("typepage",

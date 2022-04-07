@@ -20,44 +20,56 @@
     <form method="post" asp-controller="Home" asp-action="Filter">
         <div class="row">
             <div class="col-6">
-                <label asp-for="CRASH_DATETIME">Date:</label>
-                <input asp-for="CRASH_DATETIME" type="date"/>
+                <div class="form-group">
+                    <label asp-for="CRASH_DATETIME">Date:</label>
+                    <input asp-for="CRASH_DATETIME" type="date" class="form-control"/>
+                </div>
+                
             </div>
             <div class="col-6">
-                <label asp-for="CITY">City</label>
-                <select asp-for="CITY">
-                    <option value=""></option>
-                    @foreach (var c in ViewBag.Cities)
-                    {
-                        <option value="@c">@c</option>
-                    }
-                </select>
+                <div class="form-group">
+                    <label asp-for="CITY">City</label>
+                    <select asp-for="CITY" class="form-control">
+                        <option value=""></option>
+                        @foreach (var c in ViewBag.Cities)
+                        {
+                            <option value="@c">@c</option>
+                        }
+                    </select>
+                </div>
+                
             </div>
 
         </div>
 
         <div class="row">
             <div class="col-6">
-                <label asp-for="COUNTY_NAME">County</label>
-                <select asp-for="COUNTY_NAME">
-                    <option value=""></option>
-                    @foreach (var c in ViewBag.Counties)
-                    {
-                        <option value="@c">@c</option>
-                    }
-                </select>
+                <div class="form-group">
+                    <label asp-for="COUNTY_NAME">County</label>
+                    <select asp-for="COUNTY_NAME" class="form-control">
+                        <option value=""></option>
+                        @foreach (var c in ViewBag.Counties)
+                        {
+                            <option value="@c">@c</option>
+                        }
+                    </select>
+                </div>
+                
 
             </div>
             <div class="col-6">
-                <label asp-for="CRASH_SEVERITY_ID">Crash Severity</label>
-                <select asp-for="CRASH_SEVERITY_ID">
-                    <option value=""></option>
-                    <option value="1">No Injury</option>
-                    <option value="2">Possible Injury</option>
-                    <option value="3">Suspected Minor Injury</option>
-                    <option value="4">Suspected Serious Injury</option>
-                    <option value="5">Fatal</option>
-                </select>
+                <div class="form-group">
+                    <label asp-for="CRASH_SEVERITY_ID">Crash Severity</label>
+                    <select asp-for="CRASH_SEVERITY_ID" class="form-control">
+                        <option value=""></option>
+                        <option value="1">No Injury</option>
+                        <option value="2">Possible Injury</option>
+                        <option value="3">Suspected Minor Injury</option>
+                        <option value="4">Suspected Serious Injury</option>
+                        <option value="5">Fatal</option>
+                    </select>
+                </div>
+                
             </div>
         <br />
         <div class="row">

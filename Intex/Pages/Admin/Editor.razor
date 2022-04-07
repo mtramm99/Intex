@@ -1,0 +1,315 @@
+﻿@page "/admin/collisions/edit/{id:long}"
+@page "/admin/collisions/create"
+@inherits OwningComponentBase<ICollisionsRepository>
+
+<style>
+    div.validation-message {
+        color: rgb(220,53,69);
+        font-weight: 500
+    }
+</style>
+
+<h3 class="bg-@ThemeColor text-white text-center p-1">@TitleText a Collision</h3>
+
+<EditForm Model="c" OnValidSubmit="SaveCollision" asp-action="Filter">
+
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <div class="form-group">
+        <label>Crash Id</label>
+        <input class="form-control" disabled value="@c.CRASH_ID" />
+    </div>
+
+    <div class="form-group">
+        <label>Crash Date & Time</label>
+        <ValidationMessage For="@(() => c.CRASH_DATETIME)"></ValidationMessage>
+        <InputDate class="form-control" @bind-Value="c.CRASH_DATETIME"></InputDate>
+    </div>
+
+    <div class="form-group">
+        <label>Route</label>
+        <ValidationMessage For="@(() => c.ROUTE)"></ValidationMessage>
+        <InputText class="form-control" @bind-Value="c.ROUTE"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label>Milepoint</label>
+        <ValidationMessage For="@(() => c.MILEPOINT)"></ValidationMessage>
+        <InputNumber class="form-control" @bind-Value="c.MILEPOINT"></InputNumber>
+    </div>
+
+    <div class="form-group">
+        <label>Latitude</label>
+        <ValidationMessage For="@(() => c.LAT_UTM_Y)"></ValidationMessage>
+        <InputNumber class="form-control" @bind-Value="c.LAT_UTM_Y"></InputNumber>
+    </div>
+
+    <div class="form-group">
+        <label>Longitude</label>
+        <ValidationMessage For="@(() => c.LONG_UTM_X)"></ValidationMessage>
+        <InputNumber class="form-control" @bind-Value="c.LONG_UTM_X"></InputNumber>
+    </div>
+
+    <div class="form-group">
+        <label>Main Road Name</label>
+        <ValidationMessage For="@(() => c.MAIN_ROAD_NAME)"></ValidationMessage>
+        <InputText class="form-control" @bind-Value="c.MAIN_ROAD_NAME"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label>City</label>
+        <ValidationMessage For="@(() => c.CITY)"></ValidationMessage>
+        <InputText class="form-control" @bind-Value="c.CITY"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label>County</label>
+        <ValidationMessage For="@(() => c.COUNTY_NAME)"></ValidationMessage>
+        <InputText class="form-control" @bind-Value="c.COUNTY_NAME"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label>Crash Severity</label>
+        <ValidationMessage For="@(() => c.CRASH_SEVERITY_ID)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.CRASH_SEVERITY_ID">
+            <option value="">Select a Value</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Work Zone Related</label>
+        <ValidationMessage For="@(() => c.WORK_ZONE_RELATED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.WORK_ZONE_RELATED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Pedestrian Involved</label>
+        <ValidationMessage For="@(() => c.PEDESTRIAN_INVOLVED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.PEDESTRIAN_INVOLVED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Bicyclist Involved</label>
+        <ValidationMessage For="@(() => c.BICYCLIST_INVOLVED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.BICYCLIST_INVOLVED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Motorcycle Involved</label>
+        <ValidationMessage For="@(() => c.MOTORCYCLE_INVOLVED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.MOTORCYCLE_INVOLVED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Improper Restraint</label>
+        <ValidationMessage For="@(() => c.IMPROPER_RESTRAINT)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.IMPROPER_RESTRAINT">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Unrestrained</label>
+        <ValidationMessage For="@(() => c.UNRESTRAINED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.UNRESTRAINED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>DUI</label>
+        <ValidationMessage For="@(() => c.DUI)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.DUI">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Intersection Related</label>
+        <ValidationMessage For="@(() => c.INTERSECTION_RELATED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.INTERSECTION_RELATED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Wild Animal Related</label>
+        <ValidationMessage For="@(() => c.WILD_ANIMAL_RELATED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.WILD_ANIMAL_RELATED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Domestic Animal Related</label>
+        <ValidationMessage For="@(() => c.DOMESTIC_ANIMAL_RELATED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.DOMESTIC_ANIMAL_RELATED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Overturn Rollover</label>
+        <ValidationMessage For="@(() => c.OVERTURN_ROLLOVER)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.OVERTURN_ROLLOVER">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Commercial Motor Vehicle Involved</label>
+        <ValidationMessage For="@(() => c.COMMERCIAL_MOTOR_VEH_INVOLVED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.COMMERCIAL_MOTOR_VEH_INVOLVED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Teenage Driver Involved</label>
+        <ValidationMessage For="@(() => c.TEENAGE_DRIVER_INVOLVED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.TEENAGE_DRIVER_INVOLVED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Older Driver Involved</label>
+        <ValidationMessage For="@(() => c.OLDER_DRIVER_INVOLVED)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.OLDER_DRIVER_INVOLVED">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Night Dark Condition</label>
+        <ValidationMessage For="@(() => c.NIGHT_DARK_CONDITION)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.NIGHT_DARK_CONDITION">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Single Vehicle</label>
+        <ValidationMessage For="@(() => c.SINGLE_VEHICLE)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.SINGLE_VEHICLE">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Distracted Driving</label>
+        <ValidationMessage For="@(() => c.DISTRACTED_DRIVING)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.DISTRACTED_DRIVING">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Drowsy Driving</label>
+        <ValidationMessage For="@(() => c.DROWSY_DRIVING)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.DROWSY_DRIVING">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Roadway Departure</label>
+        <ValidationMessage For="@(() => c.ROADWAY_DEPARTURE)"></ValidationMessage>
+        <InputSelect class="form-control" @bind-Value="c.ROADWAY_DEPARTURE">
+            <option value=""></option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </InputSelect>
+    </div>
+
+    <button type="submit" class="btn btn-@ThemeColor">Save</button>
+    <NavLink class="btn btn-secondary" href="/admin/collisions">Cancel</NavLink>
+
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public long Id { get; set; } = 0;
+
+    public string ThemeColor => Id == 0 ? "primary" : "warning";
+    public string TitleText => Id == 0 ? "Create" : "Edit";
+
+    public Collision c { get; set; } = new Collision();
+
+    public ICollisionsRepository repo => Service;
+
+    protected override void OnParametersSet()
+    {
+        if (Id != 0) //Existing collision
+        {
+            c = repo.Collisions.FirstOrDefault(x => x.CRASH_ID == Id);
+        }
+    }
+
+    public void SaveCollision()
+    {
+        if (Id == 0) //New collision
+        {
+            repo.CreateCollision(c);
+        }
+        else
+        {
+            repo.SaveCollision(c);
+        }
+
+        NavManager.NavigateTo("/admin/collisions");
+    }
+
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+}

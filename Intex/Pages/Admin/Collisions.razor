@@ -1,12 +1,29 @@
 ﻿@page "/admin/collisions"
 @page "/admin"
+@using Intex.Models;
+@using Intex.Models.ViewModels;
+@using Intex.Infrastructure;
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using Microsoft.AspNetCore.Mvc.Routing;
+@using Microsoft.AspNetCore.Mvc.ViewFeatures;
+@using Microsoft.AspNetCore.Razor.TagHelpers;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Threading.Tasks;
 @inherits OwningComponentBase<ICollisionsRepository>
 
 <table class="table table-sm table-striped table-bordered">
 
     <thead>
         <tr>
-            <th>Crash ID</th>
+            <td>Crash ID</td>
+            <td>Date</td>
+            <td>Road</td>
+            <td>City</td>
+            <td>County</td>
+            <td>Crash Severity</td>
         </tr>
     </thead>
 
@@ -18,6 +35,11 @@
             {
                 <tr>
                     <td>@c.CRASH_ID</td>
+                    <td>@c.CRASH_DATETIME</td>
+                    <td>@c.MAIN_ROAD_NAME</td>
+                    <td>@c.CITY</td>
+                    <td>@c.COUNTY_NAME</td>
+                    <td>@c.CRASH_SEVERITY_ID</td>
 
                     <td>
                         <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(c.CRASH_ID)">Details</NavLink>
@@ -44,7 +66,13 @@
 
 <NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink>
 
+@*<div page-blah="@Infrastructure.PaginationTagHelper" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group pull-right m-1">
+</div>*@
+
 @code {
+
 
     public ICollisionsRepository repo => Service;
 
@@ -63,10 +91,58 @@
     public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
     public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
 
-    public async Task RemoveCollision (Collision c)
+    public async Task RemoveCollision(Collision c)
     {
         repo.DeleteCollision(c);
         await UpdateData();
+    }
+
+    [HtmlTargetElement("div", Attributes = "page-blah")]
+    public class PaginationTagHelper : TagHelper
+    {
+        //Dynamically create the page links
+
+        private IUrlHelperFactory uhf;
+
+        public PaginationTagHelper(IUrlHelperFactory temp)
+        {
+            uhf = temp;
+        }
+
+        [ViewContext]
+        [HtmlAttributeNotBound]
+        public ViewContext vc { get; set; }
+
+        //Different than View Context
+        public PageInfo PageBlah { get; set; }
+        public string PageAction { get; set; }
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
+        public override void Process(TagHelperContext thc, TagHelperOutput tho)
+        {
+            IUrlHelper uh = uhf.GetUrlHelper(vc);
+
+            TagBuilder final = new TagBuilder("div");
+
+            for (int i = 1; i <= PageBlah.TotalPages; i++)
+            {
+                TagBuilder tb = new TagBuilder("a");
+
+                tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
+                if (PageClassesEnabled)
+                {
+                    tb.AddCssClass(PageClass);
+                    tb.AddCssClass(i == PageBlah.CurrentPage
+                        ? PageClassSelected : PageClassNormal);
+                }
+                tb.InnerHtml.Append(i.ToString());
+                final.InnerHtml.AppendHtml(tb);
+            }
+
+            tho.Content.AppendHtml(final.InnerHtml);
+        }
     }
 }
 
