@@ -60,8 +60,8 @@ namespace Intex
             //services.AddSingleton<InferenceSession>(
             //    new InferenceSession("crashModel.onnx"));
 
-           
-            // For admin login
+
+            //For admin login
             //services.AddDbContext<AppIdentityDBContext>(options =>
             //    options.UseMySql(identity)); //////////////////////////////////// Use in production
 
