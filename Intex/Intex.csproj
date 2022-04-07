@@ -23,4 +23,8 @@
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\crashModel.onnx" />
+  </ItemGroup>
+
 </Project>

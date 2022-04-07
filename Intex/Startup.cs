@@ -35,7 +35,7 @@ namespace Intex
             });
 
             services.AddSingleton<InferenceSession>(
-                new InferenceSession("crashModel.onnx"));
+                new InferenceSession("wwwroot/crashModel.onnx"));
 
             // For admin login
             services.AddDbContext<AppIdentityDBContext>(options =>

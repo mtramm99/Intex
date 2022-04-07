@@ -1,6 +1,21 @@
 ﻿@{
+    string crashLevel;
+
+    if (Math.Round(Model.PredictedValue) == 1)
+    { crashLevel = "no injury"; }
+    else if (Math.Round(Model.PredictedValue) == 2)
+    { crashLevel = "some injury"; }
+    else if (Math.Round(Model.PredictedValue) == 3)
+    { crashLevel = "minor injury"; }
+    else if (Math.Round(Model.PredictedValue) == 4)
+    { crashLevel = "serious injury"; }
+    else { crashLevel = "a fatality"; }
+
 }
 
 @model Prediction
 
-<h2>The severity of your collision is estimated to be @Model.PredictedValue</h2>
+<h2>There was likely @crashLevel related to your accident.</h2>
+<p>The severity of your collision is estimated to be a @Math.Round(Model.PredictedValue) </p>
+
+
