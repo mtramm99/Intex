@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Collision Severity Predictor";
+        ViewData["Title"] = "Collision Severity Predictor";
 }
 
 @model collisionPredictor
@@ -7,28 +7,56 @@
 
     <form method="post" asp-controller="Inference" asp-action="Score">
 
-        <div><label>When did the Crash Take Place?</label><input asp-for="crash_datetime" /></div>
-        <div><label>At what milepoint did the crash take place?</label><input asp-for="milepoint" /></div>
-        <div>
-            <label>Did the crash happen at an intersection?</label><br />
-            <div class="wrapper">
-                <input type="radio" name="select" asp-for="intersection_related" id="option-1" checked value="1">
-                <input type="radio" name="select" asp-for="intersection_related" id="option-2" value="0">
-                <label for="option-1" class="option option-1">
-                    <div class="dot"></div>
-                    <span>Yes</span>
-                </label>
-                <label for="option-2" class="option option-2">
-                    <div class="dot"></div>
-                    <span>No</span>
-                </label>
-            </div>
+        <div><label class="font-weight-bold">When did the Crash Take Place?</label><br />
+             <input asp-for="crash_datetime" type="date" textmode="DateTime" />
         </div>
-        <div><label>Was the driver a teenager?</label><input asp-for="teenage_driver_involved" /></div>
-        <div><label>Was it dark outside?</label><input asp-for="night_dark_condition" /></div>
-        <div><label>Was there one or more vehicles involved?</label><input asp-for="single_vehicle" /></div>
-        <div><label>Did the crash take place in Salt Lake County?</label><input asp-for="county_name_SALT_LAKE" /></div>
 
-        <button type="submit">What is the severity of my crash?</button>
+        <div><label class="font-weight-bold">At what milepoint did the crash take place?</label><br />
+            <input asp-for="milepoint" type="number"  step="0.1" value="0.0"/>
+        </div>
+
+        <div>
+            <label class="font-weight-bold">Did the crash happen at an intersection?</label><br />
+                <input asp-for="intersection_related" type="radio" id="intersection" value="0"  />
+                <label for="intersection">No </label>
+                <input asp-for="intersection_related" type="radio" id="intersection" value="1" />
+                <label for="intersection">Yes</label>
+        </div>
+
+        <div>
+            <label class="font-weight-bold">Was the driver a teenager?</label> <br />
+            <input asp-for="teenage_driver_involved" type="radio" id="teen" value="0"  />
+            <label for="teen">No </label>
+            <input asp-for="teenage_driver_involved" type="radio" id="teen" value="1" />
+            <label for="teen">Yes</label>
+        </div>
+
+        <div>
+            <label class="font-weight-bold">Was it dark outside?</label><br />
+            <input asp-for="night_dark_condition" type="radio" id="night" value="0"  />
+            <label for="night">No</label>
+            <input asp-for="night_dark_condition" type="radio" id="night" value="1" />
+            <label for="night">Yes</label>
+            <label></label>
+        </div>
+
+        <div>
+            <label class="font-weight-bold">Was there one or more vehicles involved?</label><br />
+            <input asp-for="single_vehicle" type="radio" id="single" value="0" />
+            <label for="single">No</label> 
+            <input asp-for="single_vehicle" type="radio" id="single" value="1" />
+            <label for="single">Yes</label>
+        </div>
+
+        <div>
+            <label class="font-weight-bold">Did the crash take place in Salt Lake County?</label><br />
+            <input asp-for="county_name_SALT_LAKE" type="radio" id="county" value="0"/>
+            <label for="county">No</label>
+            <input asp-for="county_name_SALT_LAKE" type="radio" id="county" value="1"/>
+            <label for="county">Yes</label>
+        </div>
+
+
+        <button type="submit" class="btn-danger">What would be the severity of my crash?</button>
     </form>
 

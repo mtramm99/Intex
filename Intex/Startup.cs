@@ -49,6 +49,10 @@ namespace Intex
                 options.UseMySql(Configuration["ConnectionStrings:CollisionsDbConnection"]);
             });
 
+
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("wwwroot/crashModel.onnx"));
+
             services.AddHsts(options =>
             {
                // options.Preload = true;
@@ -64,6 +68,7 @@ namespace Intex
             //For admin login
             //services.AddDbContext<AppIdentityDBContext>(options =>
             //    options.UseMySql(identity)); //////////////////////////////////// Use in production
+
 
             services.AddDbContext<AppIdentityDBContext>(options =>
                 options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]));

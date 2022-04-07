@@ -35,6 +35,7 @@ namespace Intex.Controllers
             });
             Tensor<float> score = result.First().AsTensor<float>();
             var prediction = new Prediction { PredictedValue = score.First() };
+           
             result.Dispose();
             return View("Score", prediction);
         }
