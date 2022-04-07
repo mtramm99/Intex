@@ -6,7 +6,12 @@
 
     <thead>
         <tr>
-            <th>Crash ID</th>
+            <td>Crash ID</td>
+            <td>Date</td>
+            <td>Road</td>
+            <td>City</td>
+            <td>County</td>
+            <td>Crash Severity</td>
         </tr>
     </thead>
 
@@ -16,21 +21,26 @@
             // List the collisions
             @foreach (Collision c in CollisionData)
             {
-                <tr>
-                    <td>@c.CRASH_ID</td>
+        <tr>
+            <td>@c.CRASH_ID</td>
+            <td>@c.CRASH_DATETIME</td>
+            <td>@c.MAIN_ROAD_NAME</td>
+            <td>@c.CITY</td>
+            <td>@c.COUNTY_NAME</td>
+            <td>@c.CRASH_SEVERITY_ID</td>
 
-                    <td>
-                        <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(c.CRASH_ID)">Details</NavLink>
-                    </td>
+            <td>
+                <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(c.CRASH_ID)">Details</NavLink>
+            </td>
 
-                    <td>
-                        <NavLink class="btn btn-info btn-sm" href="@GetEditUrl(c.CRASH_ID)">Edit</NavLink>
-                    </td>
+            <td>
+                <NavLink class="btn btn-info btn-sm" href="@GetEditUrl(c.CRASH_ID)">Edit</NavLink>
+            </td>
 
-                    <td>
-                        <button class="btn btn-danger btn-sm" @onclick="@(x => RemoveCollision(c))">Delete</button>
-                    </td>
-                </tr>
+            <td>
+                <button class="btn btn-danger btn-sm" @onclick="@(x => RemoveCollision(c))">Delete</button>
+            </td>
+        </tr>
             }
         }
         else
