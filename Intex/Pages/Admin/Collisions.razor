@@ -2,18 +2,8 @@
 @page "/admin"
 @inherits OwningComponentBase<ICollisionsRepository>
 
-    @*<div class="form-group">
-        <label>Search by Crash ID</label>
-        <InputText class="form-control"></InputText>
-    </div>*@
-
 <NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink><br />
 
-    @*<EditForm Model="@CollisionData" OnValidSubmit="@Search">
-        <label>Search by Crash ID</label>
-        <InputText @bind-Value="id"></InputText>
-        <button type="submit" class="btn btn-primary">Search</button>
-    </EditForm>*@
 
 <table class="table table-sm table-striped table-bordered">
 
@@ -65,9 +55,6 @@
         }
     </tbody>
 </table>
-
-
-
 
 
 @code {
