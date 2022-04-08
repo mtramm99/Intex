@@ -142,7 +142,20 @@ namespace Intex.Controllers
 
         public IActionResult CityAnalytics ()
         {
-            return View();
+            var cities = repo.Collisions.Select(x => x.CITY).Distinct().OrderBy(x => x);
+
+            List<Stat> stats = new List<Stat>();
+
+            foreach (var c in cities)
+            {
+                //List<Collision> crashList = repo.Collisions.Where(x => x.CITY == c).ToList();
+                int crashNum = NumCrash(c);
+
+                stats.Add(new Stat() { CityName = c, numCrash = crashNum });
+
+            }
+
+            return View(stats);
         }
 
         public IActionResult Privacy()
@@ -150,6 +163,13 @@ namespace Intex.Controllers
             return View();
         }
 
+
+        public int NumCrash(string c)
+        {
+            int numCrash = repo.Collisions.Where(x => x.CITY == c).Count();
+
+            return (numCrash);
+        }
 
     }
 }
