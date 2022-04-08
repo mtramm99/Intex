@@ -29,12 +29,12 @@ namespace Intex
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            //services.AddHttpsRedirection(options =>
-            //{
-            //    options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
-            //    options.HttpsPort = 5001;
-            //});
+            services.AddHsts(options =>
+                {
+                    options.Preload = true;
+                    options.IncludeSubDomains = true;
+                    options.MaxAge = TimeSpan.FromDays(365);
+                });
 
             string ebdb = Environment.GetEnvironmentVariable("ebdb");
             string identity = Environment.GetEnvironmentVariable("identity");
@@ -53,13 +53,7 @@ namespace Intex
             services.AddSingleton<InferenceSession>(
                 new InferenceSession("wwwroot/crashModel.onnx"));
 
-            services.AddHsts(options =>
-            {
-               // options.Preload = true;
-                //options.IncludeSubDomains = true;
-                //options.MaxAge = TimeSpan.FromDays(60);
-                //options.ExcludedHosts.Add("utahcollisionresources.com");
-            });
+            
 
             //services.AddSingleton<InferenceSession>(
             //    new InferenceSession("crashModel.onnx"));
@@ -87,6 +81,12 @@ namespace Intex
 
             services.AddServerSideBlazor();
 
+            services.Configure<CookiePolicyOptions>(options => // Cookies
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             // Require better 
             services.Configure<IdentityOptions>(options =>
             {
@@ -102,20 +102,21 @@ namespace Intex
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
-            //    app.UseHsts();
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+            }
 
-            app.UseHsts();
+            //app.UseHsts();
 
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy(); // Cookie policy
             app.UseSession();
             app.UseRouting();
 
