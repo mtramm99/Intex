@@ -8,6 +8,7 @@
 
     <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.26" />
     <PackageReference Include="AWSSDKCPP-SecretsManager" Version="1.6.20171017.25" />
+    <PackageReference Include="BlazorModal" Version="1.0.10" />
 
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.23" />
