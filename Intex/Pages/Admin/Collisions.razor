@@ -2,10 +2,11 @@
 @page "/admin"
 @inherits OwningComponentBase<ICollisionsRepository>
 
-<NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink><br />
+
+<NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink>
+<br />
 
 <table class="table table-sm table-striped table-bordered">
-
     <thead>
         <tr>
             <td>Crash ID</td>
@@ -67,6 +68,7 @@
 
 
     public ICollisionsRepository repo => Service;
+
     public IEnumerable<Collision> CollisionData { get; set; }
 
     protected async override Task OnInitializedAsync()
@@ -79,9 +81,9 @@
         CollisionData = await repo.Collisions.Take(50).ToListAsync();
     }
 
-
     public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
     public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
+
 
     public async Task RemoveCollision(Collision c)
     {
@@ -90,4 +92,4 @@
         repo.DeleteCollision(c);
         await UpdateData();
     }
-}
+  }
