@@ -39,33 +39,33 @@ namespace Intex
             string ebdb = Environment.GetEnvironmentVariable("ebdb");
             string identity = Environment.GetEnvironmentVariable("identity");
 
-            //services.AddDbContext<CollisionsDbContext>(options =>
-            //{
-            //    options.UseMySql(ebdb);
-            //}); ///////////////////////////////////////////////////////////////////////// Use in production
-
             services.AddDbContext<CollisionsDbContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:CollisionsDbConnection"]);
-            });
+                options.UseMySql(ebdb);
+            }); ///////////////////////////////////////////////////////////////////////// Use in production
+
+            //services.AddDbContext<CollisionsDbContext>(options =>
+            //{
+            //    options.UseMySql(Configuration["ConnectionStrings:CollisionsDbConnection"]);
+            //});
 
 
             services.AddSingleton<InferenceSession>(
                 new InferenceSession("wwwroot/crashModel.onnx"));
 
-            
+
 
             //services.AddSingleton<InferenceSession>(
             //    new InferenceSession("crashModel.onnx"));
 
 
             //For admin login
-            //services.AddDbContext<AppIdentityDBContext>(options =>
-            //    options.UseMySql(identity)); //////////////////////////////////// Use in production
-
-
             services.AddDbContext<AppIdentityDBContext>(options =>
-                options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]));
+                options.UseMySql(identity)); //////////////////////////////////// Use in production
+
+
+            //services.AddDbContext<AppIdentityDBContext>(options =>
+                //options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDBContext>();
