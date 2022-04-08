@@ -2,21 +2,9 @@
 @page "/admin"
 @inherits OwningComponentBase<ICollisionsRepository>
 
-    @*<div class="form-group">
-        <label>Search by Crash ID</label>
-        <InputText class="form-control"></InputText>
-    </div>*@
-
 <NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink><br />
 
-    @*<EditForm Model="@CollisionData" OnValidSubmit="@Search">
-        <label>Search by Crash ID</label>
-        <InputText @bind-Value="id"></InputText>
-        <button type="submit" class="btn btn-primary">Search</button>
-    </EditForm>*@
-
 <table class="table table-sm table-striped table-bordered">
-
 
     <thead>
         <tr>
@@ -67,9 +55,6 @@
 </table>
 
 
-
-
-
 @code {
 
     @using Microsoft.AspNetCore.Mvc;
@@ -82,10 +67,7 @@
 
 
     public ICollisionsRepository repo => Service;
-
     public IEnumerable<Collision> CollisionData { get; set; }
-
-    private string searchTerm;
 
     protected async override Task OnInitializedAsync()
     {
@@ -97,6 +79,7 @@
         CollisionData = await repo.Collisions.Take(50).ToListAsync();
     }
 
+
     public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
     public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
 
@@ -107,6 +90,4 @@
         repo.DeleteCollision(c);
         await UpdateData();
     }
-
 }
-
