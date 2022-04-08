@@ -2,12 +2,11 @@
 @page "/admin"
 @inherits OwningComponentBase<ICollisionsRepository>
 
-<NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink><br />
 
+<NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink>
+<br />
 
 <table class="table table-sm table-striped table-bordered">
-
-
     <thead>
         <tr>
             <td>Crash ID</td>
@@ -72,8 +71,6 @@
 
     public IEnumerable<Collision> CollisionData { get; set; }
 
-    private string searchTerm;
-
     protected async override Task OnInitializedAsync()
     {
         await UpdateData();
@@ -87,6 +84,7 @@
     public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
     public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
 
+
     public async Task RemoveCollision(Collision c)
     {
         if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to delete collision '{c.CRASH_ID}'?"))
@@ -94,6 +92,4 @@
         repo.DeleteCollision(c);
         await UpdateData();
     }
-
-}
-
+  }

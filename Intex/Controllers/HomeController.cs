@@ -140,6 +140,11 @@ namespace Intex.Controllers
             return View(x);
         }
 
+        public IActionResult CityAnalytics ()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

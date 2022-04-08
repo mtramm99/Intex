@@ -12,7 +12,7 @@ namespace Intex.Models
     public static class IdentitySeedData
     {
 
-        private const string adminUser = "Admin";
+        private const string adminUser = "Admin"; 
         private const string adminPassword = "mixer1kitchen@toyotaFord";
 
         private const string mfaUser = "mfaAdmin";
