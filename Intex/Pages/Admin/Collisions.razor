@@ -1,4 +1,4 @@
-﻿@page "/admin/collisions"
+@page "/admin/collisions"
 @page "/admin"
 @inherits OwningComponentBase<ICollisionsRepository>
 
@@ -10,6 +10,17 @@
 
 
 <table class="table table-sm table-striped table-bordered">
+
+
+        Html.TextBox("searching")
+        <input type="submit" value="Search" />*@
+
+
+
+        Html.TextBox("searching")
+        <input type="submit" value="Search" />*@
+
+
 
     <thead>
         <tr>
@@ -64,51 +75,42 @@
 
 
 @code {
-    @*@using Microsoft.AspNetCore.Mvc;*@
+
+    @using Microsoft.AspNetCore.Mvc;
+
+    @using System.IO
+
+    @using Microsoft.AspNetCore.Components;
+    @using Microsoft.JSInterop
+    @inject IJSRuntime JSRuntime
+
 
     public ICollisionsRepository repo => Service;
-
-    public IEnumerable<Collision> CollisionData { get; set; }
-
-    private string searchTerm;
-
-    protected async override Task OnInitializedAsync()
-    {
-        await UpdateData();
-    }
-
     public async Task UpdateData()
     {
-
         CollisionData = await repo.Collisions.Take(50).ToListAsync();
     }
-
-    public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
-    public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
-
+    protected async override Task OnInitializedAsync()
+public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
+public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
+    }
     public async Task RemoveCollision(Collision c)
     {
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to delete collision '{c.CRASH_ID}'?"))
+            return;
         repo.DeleteCollision(c);
         await UpdateData();
     }
-
-    //public async Task Search(int id)
-    //{
-    //    CollisionData = await repo.Collisions.Where(x => x.CRASH_ID == id);
-    //}
-
-
-    // no clue what this does
-    //public ActionResult Search(int? searching)
-    //{
-    //    if (searching.HasValue)
-    //    {
-    //        return View(repo.Collisions.Where(x => x.CRASH_ID.ToString().Contains(searching.ToString())).ToList());
-    //    }
-    //    else
-    //    {
-    //        return View(repo.Collisions.ToList());
-    //    }
-    //}
+}
+//{
+//    if (searching.HasValue)
+//    {
+//        return View(repo.Collisions.Where(x => x.CRASH_ID.ToString().Contains(searching.ToString())).ToList());
+//    }
+//    else
+//    {
+//        return View(repo.Collisions.ToList());
+//    }
+//}
 }
 
