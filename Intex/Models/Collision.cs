@@ -14,7 +14,7 @@ namespace Intex.Models
         [Required]
         public int CRASH_ID { get; set; }
 
-        [Required (ErrorMessage="Please Enter the Date & Time")]
+        // [Required (ErrorMessage="Please Enter the Date & Time")]
         public DateTime CRASH_DATETIME { get; set; }
 
         [Required (ErrorMessage = "Please Enter a Route Number")]

@@ -6,13 +6,7 @@
 <NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink>
 <br />
 
-
 <table class="table table-sm table-striped table-bordered">
-
-
-
-
-
     <thead>
         <tr>
             <td>Crash ID</td>
@@ -62,9 +56,6 @@
 </table>
 
 
-
-
-
 @code {
 
     @using Microsoft.AspNetCore.Mvc;
@@ -77,14 +68,23 @@
 
 
     public ICollisionsRepository repo => Service;
+
+    public IEnumerable<Collision> CollisionData { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+
     public async Task UpdateData()
     {
         CollisionData = await repo.Collisions.Take(50).ToListAsync();
     }
-    protected async override Task OnInitializedAsync();
-public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
-public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
-    }
+
+    public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
+    public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
+
+
     public async Task RemoveCollision(Collision c)
     {
         if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to delete collision '{c.CRASH_ID}'?"))
@@ -92,16 +92,4 @@ public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
         repo.DeleteCollision(c);
         await UpdateData();
     }
-}
-//{
-//    if (searching.HasValue)
-//    {
-//        return View(repo.Collisions.Where(x => x.CRASH_ID.ToString().Contains(searching.ToString())).ToList());
-//    }
-//    else
-//    {
-//        return View(repo.Collisions.ToList());
-//    }
-//}
-}
-
+  }
