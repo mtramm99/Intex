@@ -4,18 +4,71 @@
 
 @model List<Collision>
 
+
+
+<header class="masthead p-md-4">
+    <div class="container px-4">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-7">
+                <!-- Mashead text and app badges-->
+                <div class="mb-5 mb-lg-0 text-left">
+                    <h1 class="mb-3 float-lg-left font-size display-4">Utah Collision Resources</h1>
+                    <h3 class="lead fw-normal font-italic text-primary font-weight-normal mb-5 text-left ">
+                        <p class="text-black-50 font-weight-bold">Welcome to UCR.</p>An all-in-one database and statistics dashboard for UDOT administrators,
+                        engaged citizens and elected officials.
+                    </h3>
+
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <!-- Masthead device mockup feature-->
+                <div class="masthead-device-mockup">
+
+                    <div class="device-wrapper">
+                        <img src="~/road-icon-vector-2.jpg" width="300" class="float-right justify-content-end" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<aside class="text-center ">
+    <div class="container px-1">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-xl-8">
+                <a class="btn btn-outline-dark py-3 px-4 rounded-pill" asp-controller="Inference" asp-action="EnterData"  >Crash Calculator</a>
+                <a class="btn btn-outline-dark py-3 px-4 rounded-pill" asp-controller="Home" asp-action="CollisionSummary" >View Collisions</a>
+                <a class="btn btn-outline-dark py-3 px-4 rounded-pill" href="https://startbootstrap.com/theme/new-age" target="_blank">Statistics Dashboard</a>
+            <br /><br /><br />
+            </div>
+        </div>
+    </div>
+</aside>
+
+<aside class="text-center ">
+    <div class="container px-1">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-xl-8">
+                <div class="h2 fs-1 mb-4">With collisions rates constantly increasing, <br />Utah needs solutions. And fast.</div>
+
+                <section class="bg-gradient-primary-to-secondary" id="download">
+                    <div class="container px-5">
+                        <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
+                            <img class="app-badge" src="~/Utah-State-legislature-logo-crop-2.png " width="100" />
+                            <img class="app-badge" src="~/UDOTlogo(1).png" width="100" />
+                            <img class="app-badge" src="~/download.png" width="100" />
+
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</aside>
+
     <partial name="_CookieConsentPartial" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <h2>Please Work: 
-    @*@foreach (var c in Model)
-            {
-                @c.CRASH_DATETIME
-            }*@
-    </h2>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CityAnalytics">City Analytics</a>
-
-    <h1>Please work. Please.</h1>
-    <p>@Environment.GetEnvironmentVariable("ebdb")</p>
-</div>
