@@ -4,16 +4,6 @@
 @model Collision
 
 <div class="container p-5 border">
-    @{
-        //Filters:
-
-        // Date
-        // Main Road Name
-        // City
-        // County
-        // Crash Severity Id
-        // Other factors
-    }
 
     <div class="row"><h4>Filter Results</h4></div>
 
@@ -22,7 +12,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label asp-for="CRASH_DATETIME">Date:</label>
-                    <input asp-for="CRASH_DATETIME" type="datetime-local" class="form-control"/>
+                    <input asp-for="CRASH_DATETIME" type="date" class="form-control"/>
                 </div>
                 
             </div>
