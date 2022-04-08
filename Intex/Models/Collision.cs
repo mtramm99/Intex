@@ -11,7 +11,7 @@ namespace Intex.Models
     public class Collision
     {
         [Key]
-        [BindNever]
+        [Required]
         public int CRASH_ID { get; set; }
 
         // [Required (ErrorMessage="Please Enter the Date & Time")]
