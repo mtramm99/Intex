@@ -2,7 +2,6 @@
 @page "/admin"
 @inherits OwningComponentBase<ICollisionsRepository>
 
-
 <NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink>
 <br />
 
@@ -92,4 +91,4 @@
         repo.DeleteCollision(c);
         await UpdateData();
     }
-  }
+}
