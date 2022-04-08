@@ -108,52 +108,5 @@
         await UpdateData();
     }
 
-    @*@using Microsoft.AspNetCore.Mvc;*@
-
-public ICollisionsRepository repo => Service;
-
-public IEnumerable<Collision> CollisionData { get; set; }
-
-private string searchTerm;
-
-protected async override Task OnInitializedAsync()
-{
-    await UpdateData();
-}
-
-public async Task UpdateData()
-{
-
-    CollisionData = await repo.Collisions.Take(50).ToListAsync();
-}
-
-public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
-public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
-
-public async Task RemoveCollision(Collision c)
-{
-    repo.DeleteCollision(c);
-    await UpdateData();
-}
-
-//public async Task Search(int id)
-//{
-//    CollisionData = await repo.Collisions.Where(x => x.CRASH_ID == id);
-//}
-
-
-// no clue what this does
-//public ActionResult Search(int? searching)
-//{
-//    if (searching.HasValue)
-//    {
-//        return View(repo.Collisions.Where(x => x.CRASH_ID.ToString().Contains(searching.ToString())).ToList());
-//    }
-//    else
-//    {
-//        return View(repo.Collisions.ToList());
-//    }
-//}
-
 }
 
