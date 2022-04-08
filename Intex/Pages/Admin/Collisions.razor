@@ -2,8 +2,6 @@
 @page "/admin"
 @inherits OwningComponentBase<ICollisionsRepository>
 
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 
 <NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink>
 <br />
@@ -12,13 +10,6 @@
 <table class="table table-sm table-striped table-bordered">
 
 
-        Html.TextBox("searching")
-        <input type="submit" value="Search" />*@
-
-
-
-        Html.TextBox("searching")
-        <input type="submit" value="Search" />*@
 
 
 
@@ -90,7 +81,7 @@
     {
         CollisionData = await repo.Collisions.Take(50).ToListAsync();
     }
-    protected async override Task OnInitializedAsync()
+    protected async override Task OnInitializedAsync();
 public string GetDetailsUrl(long id) => $"/admin/collisions/details/{id}";
 public string GetEditUrl(long id) => $"/admin/collisions/edit/{id}";
     }
