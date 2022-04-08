@@ -4,23 +4,59 @@
 
 @model List<Stat>
 
-<h1>Crash Statistics By City</h1>
+<div class="row">
+    <div class="col-3">
+        
+    </div>
+    <div class="col-6">
+        <h3>Crash Statistics By Factor</h3>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>City</th>
-            <th>Number of Collisions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var c in Model)
-            {
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>@c.CityName</td>
-                    <td>@c.numCrash</td>
+                    <th>Factor</th>
+                    <th>Percent of Collisions</th>
                 </tr>
-            }
-    </tbody>
-</table>
+            </thead>
+
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.Factor</td>
+                        <td>@String.Format("{0:P2}.", c.Perc)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <br />
+
+        <h3>Crash Severity Proportions</h3>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>No Injury</td>
+                <td>@String.Format("{0:P2}.", @ViewBag.Severities[0])</td>
+            </tr>
+            <tr>
+                <td>Possible Injury</td>
+                <td>@String.Format("{0:P2}.", @ViewBag.Severities[1])</td>
+            </tr>
+            <tr>
+                <td>Suspected Minor Injury</td>
+                <td>@String.Format("{0:P2}.", @ViewBag.Severities[2])</td>
+            </tr>
+            <tr>
+                <td>Suspected Serious Injury</td>
+                <td>@String.Format("{0:P2}.", @ViewBag.Severities[3])</td>
+            </tr>
+            <tr>
+                <td>Fatal</td>
+                <td>@String.Format("{0:P2}.", @ViewBag.Severities[4])</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-3">
+
+    </div>
+</div>

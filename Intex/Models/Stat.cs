@@ -7,8 +7,7 @@ namespace Intex.Models
 {
     public class Stat
     {
-        public string CityName { get; set; }
-        public int numCrash { get; set; }
-        public string topFactor { get; set; }
+        public string Factor { get; set; }
+        public decimal Perc { get; set; }
     }
 }
