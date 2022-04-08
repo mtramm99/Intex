@@ -1,8 +1,7 @@
 ﻿@page "/admin/collisions/edit/{id:long}"
 @page "/admin/collisions/create"
-@using Intex.Models 
+@using Intex.Models
 @inherits OwningComponentBase<ICollisionsRepository>
-
 
 
 <style>
@@ -32,49 +31,49 @@
 
     <div class="form-group">
         <label>Route</label>
-        <ValidationMessage For="@(() => c.ROUTE)">Please enter a valid route</ValidationMessage>
+        <ValidationMessage For="@(() => c.ROUTE)"></ValidationMessage>
         <InputText class="form-control" @bind-Value="c.ROUTE"></InputText>
     </div>
 
     <div class="form-group">
         <label>Milepoint</label>
-        <ValidationMessage For="@(() => c.MILEPOINT)">Please enter a valid Milepoint</ValidationMessage>
+        <ValidationMessage For="@(() => c.MILEPOINT)"></ValidationMessage>
         <InputNumber class="form-control" @bind-Value="c.MILEPOINT"></InputNumber>
     </div>
 
     <div class="form-group">
         <label>Latitude</label>
-        <ValidationMessage For="@(() => c.LAT_UTM_Y)">Please enter a valid Latitude</ValidationMessage>
+        <ValidationMessage For="@(() => c.LAT_UTM_Y)"></ValidationMessage>
         <InputNumber class="form-control" @bind-Value="c.LAT_UTM_Y"></InputNumber>
     </div>
 
     <div class="form-group">
         <label>Longitude</label>
-        <ValidationMessage For="@(() => c.LONG_UTM_X)">Please enter a valid Longitude</ValidationMessage>
+        <ValidationMessage For="@(() => c.LONG_UTM_X)"></ValidationMessage>
         <InputNumber class="form-control" @bind-Value="c.LONG_UTM_X"></InputNumber>
     </div>
 
     <div class="form-group">
         <label>Main Road Name</label>
-        <ValidationMessage For="@(() => c.MAIN_ROAD_NAME)">Please enter a Main Road name</ValidationMessage>
+        <ValidationMessage For="@(() => c.MAIN_ROAD_NAME)"></ValidationMessage>
         <InputText class="form-control" @bind-Value="c.MAIN_ROAD_NAME"></InputText>
     </div>
 
     <div class="form-group">
         <label>City</label>
-        <ValidationMessage For="@(() => c.CITY)">Please enter a City name</ValidationMessage>
+        <ValidationMessage For="@(() => c.CITY)"></ValidationMessage>
         <InputText class="form-control" @bind-Value="c.CITY"></InputText>
     </div>
 
     <div class="form-group">
         <label>County</label>
-        <ValidationMessage For="@(() => c.COUNTY_NAME)">Please enter a County name</ValidationMessage>
+        <ValidationMessage For="@(() => c.COUNTY_NAME)"></ValidationMessage>
         <InputText class="form-control" @bind-Value="c.COUNTY_NAME"></InputText>
     </div>
 
     <div class="form-group">
         <label>Crash Severity</label>
-        <ValidationMessage For="@(() => c.CRASH_SEVERITY_ID)">Please select a Crash Severity</ValidationMessage>
+        <ValidationMessage For="@(() => c.CRASH_SEVERITY_ID)"></ValidationMessage>
         <InputSelect class="form-control" @bind-Value="c.CRASH_SEVERITY_ID">
             <option value="">Select a Value</option>
             <option value="1">No Injury</option>
